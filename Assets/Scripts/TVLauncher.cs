@@ -9,11 +9,13 @@ public class TVLauncher : MonoBehaviour {
 	public GameObject player;
 	public PlayerInput controller;
 	public Rigidbody2D charRigid;
+	private float timer = 5.0f;
 
 	// Use this for initialization
 	void Start () {
 		controller = player.GetComponent<PlayerInput> ();
 		charRigid = player.GetComponent<Rigidbody2D> ();
+
 	}
 	
 	// Update is called once per frame
@@ -42,10 +44,16 @@ public class TVLauncher : MonoBehaviour {
 				spawnPoint.y += 1.1f;
 				controller.gameObject.transform.position = spawnPoint;
 				controller.gameObject.SetActive (true);
+				controller.unPossSound.Play ();
+				//charRigid.gravityScale = 0;
 				charRigid.AddForce(transform.up * 500);
 				controller.nearTV = false;
 
 			}
 		}
+	}
+
+	void ChangeAlpha(){
+		
 	}
 }

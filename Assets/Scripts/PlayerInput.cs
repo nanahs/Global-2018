@@ -15,6 +15,12 @@ public class PlayerInput : MonoBehaviour
 	public bool nearTV = false;
 	public bool isItGrounded;
 	public Rigidbody2D Rigid;
+	public AudioSource jumpSource;
+	public AudioSource transSound;
+	public AudioSource unPossSound;
+	public AudioSource vacuumStarting;
+	public AudioSource vacuumRunning;
+	public AudioSource vacuumOff;
 
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -141,16 +147,24 @@ public class PlayerInput : MonoBehaviour
 			Ray ray = new Ray (transform.position, Vector2.right);
 	    	if (Physics.Raycast (transform.position, Vector2.right, 5)) {
 				Physics.Raycast (ray, out hit);
+				transSound.Play ();
 				if (hit.collider.CompareTag("VacuumCleaner")) {
+					vacuumStarting.Play ();
+					Invoke ("playVacuum", 1.0f);
+					hit.collider.gameObject.GetComponent<VacuumController> ().inControl = true;
 					nearVacuum = true;
 					gameObject.SetActive (false);
-					transform.position = hit.collider.transform.position;
+					Vector3 spawnPoint = transform.position;
+					spawnPoint.y += 0.6f;
+					transform.position = spawnPoint;
 				}
 				if (hit.collider.CompareTag("Light")){
+					
 					nearLight = true;
 					transform.position = hit.collider.transform.position;
 				}
 				if (hit.collider.CompareTag ("TV")) {
+					
 					nearTV = true;
 					gameObject.SetActive (false);
 					Vector3 spawnPoint = transform.position;
@@ -167,14 +181,17 @@ public class PlayerInput : MonoBehaviour
 			Ray ray = new Ray (transform.position, Vector2.left);
 			if (Physics.Raycast (transform.position, Vector2.left, 5)) {
 				Physics.Raycast (ray, out hit);
+				transSound.Play ();
 				if (hit.collider.CompareTag("Light")){	
 					nearLight = true;
 					transform.position = hit.collider.transform.position;
 					Vector3 spawnPoint = transform.position;
-					//spawnPoint.y += 0.6f;
 					transform.position = spawnPoint;
 				} 
 				if (hit.collider.CompareTag("VacuumCleaner")) {
+					//vacuumRunning.Play ();
+					vacuumStarting.Play ();
+					Invoke ("playVacuum", 1.0f);
 					hit.collider.gameObject.GetComponent<VacuumController> ().inControl = true;
 					nearVacuum = true;
 					gameObject.SetActive (false);
@@ -185,6 +202,7 @@ public class PlayerInput : MonoBehaviour
 				if (hit.collider.CompareTag ("TV")) {
 					nearTV = true;
 					gameObject.SetActive (false);
+
 					Vector3 spawnPoint = transform.position;
 					spawnPoint.y += 0.3f;
 					transform.position = spawnPoint;
@@ -199,7 +217,13 @@ public class PlayerInput : MonoBehaviour
 	void Jump(){
 		if (Input.GetKeyDown (KeyCode.Space) && isItGrounded) {
 			Rigid.AddForce (transform.up * 400);
+			jumpSource.Play ();
 		}
+	}
+
+	void playVacuum(){
+		vacuumRunning.enabled = true;
+		vacuumRunning.Play ();
 	}
 
 }
