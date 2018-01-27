@@ -8,6 +8,7 @@ public class LightOn : MonoBehaviour {
 	public GameObject lightObject;
 	public GameObject player;
 	public PlayerInput controller;
+	public bool wasHit = false;
 
 	// Use this for initialization
 	void Start () {

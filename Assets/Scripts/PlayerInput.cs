@@ -13,6 +13,7 @@ public class PlayerInput : MonoBehaviour
 	public bool nearVacuum = false;
 	public bool nearLight = false;
 	public bool nearTV = false;
+	public bool nearOut = false;
 	public bool isItGrounded;
 	public Rigidbody2D Rigid;
 	public AudioSource jumpSource;
@@ -21,6 +22,7 @@ public class PlayerInput : MonoBehaviour
 	public AudioSource vacuumStarting;
 	public AudioSource vacuumRunning;
 	public AudioSource vacuumOff;
+	private Collider coli;
 
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -145,31 +147,22 @@ public class PlayerInput : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.E)) {
 			RaycastHit hit;
 			Ray ray = new Ray (transform.position, Vector2.right);
-	    	if (Physics.Raycast (transform.position, Vector2.right, 5)) {
+	    	if (Physics.Raycast (transform.position, Vector2.right, 2)) {
 				Physics.Raycast (ray, out hit);
 				transSound.Play ();
 				if (hit.collider.CompareTag("VacuumCleaner")) {
-					vacuumStarting.Play ();
-					Invoke ("playVacuum", 1.0f);
-					hit.collider.gameObject.GetComponent<VacuumController> ().inControl = true;
-					nearVacuum = true;
-					gameObject.SetActive (false);
-					Vector3 spawnPoint = transform.position;
-					spawnPoint.y += 0.6f;
-					transform.position = spawnPoint;
+					Vacuum (hit);
 				}
 				if (hit.collider.CompareTag("Light")){
-					
 					nearLight = true;
 					transform.position = hit.collider.transform.position;
-				}
-				if (hit.collider.CompareTag ("TV")) {
-					
-					nearTV = true;
-					gameObject.SetActive (false);
 					Vector3 spawnPoint = transform.position;
-					spawnPoint.y += 0.3f;
 					transform.position = spawnPoint;
+				} else if(hit.collider.CompareTag ("TV")) {
+					hit.collider.gameObject.GetComponentInChildren<TVLauncher> ().wasHitTV = true;
+					Television ();
+				} else if (hit.collider.CompareTag ("Outlet")) {
+					Outlet (hit);
 				}
 
 			}
@@ -189,25 +182,13 @@ public class PlayerInput : MonoBehaviour
 					transform.position = spawnPoint;
 				} 
 				if (hit.collider.CompareTag("VacuumCleaner")) {
-					//vacuumRunning.Play ();
-					vacuumStarting.Play ();
-					Invoke ("playVacuum", 1.0f);
-					hit.collider.gameObject.GetComponent<VacuumController> ().inControl = true;
-					nearVacuum = true;
-					gameObject.SetActive (false);
-					Vector3 spawnPoint = transform.position;
-					spawnPoint.y += 0.6f;
-					transform.position = spawnPoint;
+					Vacuum (hit);
+				} else if (hit.collider.CompareTag ("TV")) {
+					hit.collider.gameObject.GetComponent<TVLauncher> ().wasHitTV = true;
+					Television ();	
+				} else if (hit.collider.CompareTag ("Outlet")) {
+					Outlet (hit);
 				}
-				if (hit.collider.CompareTag ("TV")) {
-					nearTV = true;
-					gameObject.SetActive (false);
-
-					Vector3 spawnPoint = transform.position;
-					spawnPoint.y += 0.3f;
-					transform.position = spawnPoint;
-				}
-
 
 			}
 
@@ -224,6 +205,32 @@ public class PlayerInput : MonoBehaviour
 	void playVacuum(){
 		vacuumRunning.enabled = true;
 		vacuumRunning.Play ();
+	}
+
+	void Vacuum(RaycastHit hit){
+		hit.collider.gameObject.GetComponent<VacuumController>().wasHitVac = true;
+		vacuumStarting.Play ();
+		Invoke ("playVacuum", 1.0f);
+		hit.collider.gameObject.GetComponent<VacuumController> ().inControl = true;
+		nearVacuum = true;
+		gameObject.SetActive (false);
+		Vector3 spawnPoint = transform.position;
+		spawnPoint.y += 0.6f;
+		transform.position = spawnPoint;
+	}
+
+	void Television(){
+		
+		nearTV = true;
+		gameObject.SetActive (false);
+		Vector3 spawnPoint = transform.position;
+		spawnPoint.y += 0.3f;
+		transform.position = spawnPoint;
+	}
+
+	void Outlet(RaycastHit hit){
+		hit.collider.gameObject.GetComponent<Outlet> ().wasHitOut = true;
+		nearOut = true;
 	}
 
 }
