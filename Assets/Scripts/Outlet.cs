@@ -9,6 +9,8 @@ public class Outlet : MonoBehaviour {
 	public Rigidbody2D charRigid;
 	public PlayerInput controller;
 	public bool wasHitOut = false;
+	public GameObject standingLamp;
+	public GameObject Game;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +24,15 @@ public class Outlet : MonoBehaviour {
 			player.transform.position = otherOutlet.transform.position;
 			wasHitOut = false;
 			charRigid.AddForce(transform.up * 100);
+			if (standingLamp != null) {
+				if (standingLamp.GetComponentInChildren<Light> ().intensity == 0.0f) {
+					standingLamp.GetComponentInChildren<Light> ().intensity = 0.5f;
+					Game.GetComponent<GameManager> ().counter++;
+				} else {
+					standingLamp.GetComponentInChildren<Light> ().intensity = 0.0f;
+					Game.GetComponent<GameManager> ().counter--;
+				}
+			}
 		}
 	}
 }

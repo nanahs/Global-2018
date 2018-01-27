@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour {
 
-	public float loopStart = 4;
-	public float loopLength = 32;
+	public float loopStart = 4.8f;
+	public float loopLength = 38.4f;
 	AudioSource source;
 
 	// Use this for initialization

@@ -152,17 +152,15 @@ public class PlayerInput : MonoBehaviour
 				transSound.Play ();
 				if (hit.collider.CompareTag("VacuumCleaner")) {
 					Vacuum (hit);
-				}
-				if (hit.collider.CompareTag("Light")){
-					nearLight = true;
-					transform.position = hit.collider.transform.position;
-					Vector3 spawnPoint = transform.position;
-					transform.position = spawnPoint;
-				} else if(hit.collider.CompareTag ("TV")) {
+				} else if (hit.collider.CompareTag ("Light")) {
+					LightOnFunc (hit);
+				} else if (hit.collider.CompareTag ("TV")) {
 					hit.collider.gameObject.GetComponentInChildren<TVLauncher> ().wasHitTV = true;
 					Television ();
 				} else if (hit.collider.CompareTag ("Outlet")) {
 					Outlet (hit);
+				} else if (hit.collider.CompareTag ("Outlet (2Lamp)")) {
+					Outlet2 (hit);
 				}
 
 			}
@@ -172,22 +170,20 @@ public class PlayerInput : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.Q)) {
 			RaycastHit hit;
 			Ray ray = new Ray (transform.position, Vector2.left);
-			if (Physics.Raycast (transform.position, Vector2.left, 5)) {
+			if (Physics.Raycast (transform.position, Vector2.left, 2)) {
 				Physics.Raycast (ray, out hit);
 				transSound.Play ();
-				if (hit.collider.CompareTag("Light")){	
-					nearLight = true;
-					transform.position = hit.collider.transform.position;
-					Vector3 spawnPoint = transform.position;
-					transform.position = spawnPoint;
-				} 
 				if (hit.collider.CompareTag("VacuumCleaner")) {
 					Vacuum (hit);
+				} else if (hit.collider.CompareTag ("Light")) {
+					LightOnFunc (hit);
 				} else if (hit.collider.CompareTag ("TV")) {
-					hit.collider.gameObject.GetComponent<TVLauncher> ().wasHitTV = true;
-					Television ();	
+					hit.collider.gameObject.GetComponentInChildren<TVLauncher> ().wasHitTV = true;
+					Television ();
 				} else if (hit.collider.CompareTag ("Outlet")) {
 					Outlet (hit);
+				} else if (hit.collider.CompareTag ("Outlet (2Lamp)")) {
+					Outlet2 (hit);
 				}
 
 			}
@@ -233,4 +229,16 @@ public class PlayerInput : MonoBehaviour
 		nearOut = true;
 	}
 
+	void LightOnFunc(RaycastHit hit){
+		nearLight = true;
+		hit.collider.GetComponent<LightOn> ().wasHit = true;
+		transform.position = hit.collider.transform.position;
+		Vector3 spawnPoint = transform.position;
+		transform.position = spawnPoint;
+	}
+
+	void Outlet2(RaycastHit hit){
+		hit.collider.gameObject.GetComponent<Outlet2Lamp> ().wasHitOut2 = true;
+		nearOut = true;
+	}
 }

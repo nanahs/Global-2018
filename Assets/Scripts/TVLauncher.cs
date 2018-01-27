@@ -9,7 +9,7 @@ public class TVLauncher : MonoBehaviour {
 	public GameObject player;
 	public PlayerInput controller;
 	public Rigidbody2D charRigid;
-	private float timer = 5.0f;
+	//private float timer = 5.0f;
 	public bool wasHitTV = false;
 
 	// Use this for initialization
