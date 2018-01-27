@@ -10,8 +10,11 @@ public class PlayerInput : MonoBehaviour
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
-
+	public bool nearVacuum = false;
+	public bool nearLight = false;
+	public bool nearTV = false;
 	public bool isItGrounded;
+	public Rigidbody2D Rigid;
 
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -20,6 +23,10 @@ public class PlayerInput : MonoBehaviour
 	//private Animator _animator;
 	private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
+
+	void Start(){
+		Rigid = gameObject.GetComponent<Rigidbody2D> ();
+	}
 
 
 	void Awake()
@@ -123,6 +130,76 @@ public class PlayerInput : MonoBehaviour
 
 		// grab our current _velocity to use as a base for all calculations
 		_velocity = _controller.velocity;
+		takeControl ();
+		Jump ();
+	}
+
+	//takes control of other objects given an input
+	void takeControl(){
+		if (Input.GetKeyDown (KeyCode.E)) {
+			RaycastHit hit;
+			Ray ray = new Ray (transform.position, Vector2.right);
+	    	if (Physics.Raycast (transform.position, Vector2.right, 5)) {
+				Physics.Raycast (ray, out hit);
+				if (hit.collider.CompareTag("VacuumCleaner")) {
+					nearVacuum = true;
+					gameObject.SetActive (false);
+					transform.position = hit.collider.transform.position;
+				}
+				if (hit.collider.CompareTag("Light")){
+					nearLight = true;
+					transform.position = hit.collider.transform.position;
+				}
+				if (hit.collider.CompareTag ("TV")) {
+					nearTV = true;
+					gameObject.SetActive (false);
+					Vector3 spawnPoint = transform.position;
+					spawnPoint.y += 0.3f;
+					transform.position = spawnPoint;
+				}
+
+			}
+
+		}
+
+		if (Input.GetKeyDown (KeyCode.Q)) {
+			RaycastHit hit;
+			Ray ray = new Ray (transform.position, Vector2.left);
+			if (Physics.Raycast (transform.position, Vector2.left, 5)) {
+				Physics.Raycast (ray, out hit);
+				if (hit.collider.CompareTag("Light")){	
+					nearLight = true;
+					transform.position = hit.collider.transform.position;
+					Vector3 spawnPoint = transform.position;
+					//spawnPoint.y += 0.6f;
+					transform.position = spawnPoint;
+				} 
+				if (hit.collider.CompareTag("VacuumCleaner")) {
+					hit.collider.gameObject.GetComponent<VacuumController> ().inControl = true;
+					nearVacuum = true;
+					gameObject.SetActive (false);
+					Vector3 spawnPoint = transform.position;
+					spawnPoint.y += 0.6f;
+					transform.position = spawnPoint;
+				}
+				if (hit.collider.CompareTag ("TV")) {
+					nearTV = true;
+					gameObject.SetActive (false);
+					Vector3 spawnPoint = transform.position;
+					spawnPoint.y += 0.3f;
+					transform.position = spawnPoint;
+				}
+
+
+			}
+
+		}
+	}
+
+	void Jump(){
+		if (Input.GetKeyDown (KeyCode.Space) && isItGrounded) {
+			Rigid.AddForce (transform.up * 400);
+		}
 	}
 
 }
