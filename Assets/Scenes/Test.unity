@@ -228,7 +228,7 @@ Prefab:
     - target: {fileID: 8195094280877579772, guid: a0e5edc3fb8bb4bfea77946090737940,
         type: 2}
       propertyPath: m_Tiles.Array.size
-      value: 43
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 4154994846437982, guid: a0e5edc3fb8bb4bfea77946090737940, type: 2}
       propertyPath: m_LocalPosition.x
@@ -295,22 +295,22 @@ Prefab:
     - target: {fileID: 8195094280877579772, guid: a0e5edc3fb8bb4bfea77946090737940,
         type: 2}
       propertyPath: m_TileAssetArray.Array.data[0].m_RefCount
-      value: 44
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8195094280877579772, guid: a0e5edc3fb8bb4bfea77946090737940,
         type: 2}
       propertyPath: m_TileSpriteArray.Array.data[0].m_RefCount
-      value: 44
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8195094280877579772, guid: a0e5edc3fb8bb4bfea77946090737940,
         type: 2}
       propertyPath: m_TileMatrixArray.Array.data[0].m_RefCount
-      value: 43
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 8195094280877579772, guid: a0e5edc3fb8bb4bfea77946090737940,
         type: 2}
       propertyPath: m_TileColorArray.Array.data[0].m_RefCount
-      value: 44
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8195094280877579772, guid: a0e5edc3fb8bb4bfea77946090737940,
         type: 2}
@@ -5861,91 +5861,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4cbd51a1f47750845a1da0bffea4a1c0, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &780818993 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1747932342991386, guid: 52a79cc95cebe6c48986d91451bba1e0,
-    type: 2}
-  m_PrefabInternal: {fileID: 1618491219}
---- !u!82 &780818999
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 780818993}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 790e985917342db42859a63367be0e8a, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.33
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!1001 &826115162
 Prefab:
   m_ObjectHideFlags: 0
@@ -6419,21 +6334,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 114576232406603404, guid: 52a79cc95cebe6c48986d91451bba1e0,
-        type: 2}
-      propertyPath: possess
-      value: 
-      objectReference: {fileID: 8300000, guid: 386cf335e058e2b46881ee373d5489ca, type: 3}
-    - target: {fileID: 114576232406603404, guid: 52a79cc95cebe6c48986d91451bba1e0,
-        type: 2}
-      propertyPath: jump
-      value: 
-      objectReference: {fileID: 8300000, guid: 790e985917342db42859a63367be0e8a, type: 3}
-    - target: {fileID: 114576232406603404, guid: 52a79cc95cebe6c48986d91451bba1e0,
-        type: 2}
-      propertyPath: unpossess
-      value: 
-      objectReference: {fileID: 8300000, guid: 8988c97c489ecb945ae3d039ad2f11af, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 52a79cc95cebe6c48986d91451bba1e0, type: 2}
   m_IsPrefabParent: 0

@@ -62,9 +62,10 @@ public class CarController : PossesableObject
                 player.transform.position = spawnPoint;
 
                 PlatformerMotor2D pm2 = player.GetComponent<PlatformerMotor2D>();
-                pm2.Jump();
 
                 UnPosssessThis();
+
+				pm2.Jump();
 
             }
 
