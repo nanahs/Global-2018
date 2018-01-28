@@ -36,7 +36,7 @@ public class CarController : PossesableObject
                 goingLeft = false;
                 if (!goingLeft)
                 {
-                    gameObject.GetComponentInChildren<SpriteRenderer>().flipX = true;
+                    gameObject.GetComponentInChildren<SpriteRenderer>().flipX = false;
                 }
             }
             if (Input.GetKey(KeyCode.A))
@@ -45,7 +45,7 @@ public class CarController : PossesableObject
                 goingLeft = true;
                 if (goingLeft)
                 {
-                    gameObject.GetComponentInChildren<SpriteRenderer>().flipX = false;
+                    gameObject.GetComponentInChildren<SpriteRenderer>().flipX = true;
                 }
             }
             if (Input.GetKeyDown(KeyCode.Space))

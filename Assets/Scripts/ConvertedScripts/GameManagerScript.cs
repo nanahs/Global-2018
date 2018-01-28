@@ -49,6 +49,8 @@ public class GameManagerScript : MonoBehaviour {
 	void winStage(){
 		soundManager.audioSource.PlayOneShot(soundManager.winning);
 		text.text = "LEVEL COMPLETE";
+		Camera.main.GetComponent<AudioSource> ().Pause();
+
 
 		SceneManager.LoadScene (SceneManager.GetActiveScene().buildIndex + 1);
 	}
