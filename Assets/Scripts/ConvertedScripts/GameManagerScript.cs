@@ -30,6 +30,7 @@ public class GameManagerScript : MonoBehaviour {
 
         if (lightManager.IsAllLit)
         {
+			Camera.main.GetComponent<AudioSource> ().Pause();
             soundManager.audioSource.PlayOneShot(soundManager.winning);
             text.text = "LEVEL COMPLETE";
         }
