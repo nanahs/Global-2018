@@ -19,6 +19,13 @@ public class Outlet : PossesableObject {
             }
             
             player.transform.position = otherOutlet.transform.position;
+
+			Outlet otherScript = otherOutlet.GetComponent<Outlet> ();
+
+			if (otherScript.lightScript) {
+				otherScript.lightScript.toggleLight();
+			}
+
             UnPosssessThis();
 
 		}
