@@ -7,6 +7,9 @@ public class Intro : MonoBehaviour {
     public GameObject text;
     public GameObject ampy;
     public GameObject theLights;
+	public GameObject start;
+	public GameObject quit;
+	public GameObject credits;
 
 	public AudioSource audioSource;
 
@@ -25,7 +28,11 @@ public class Intro : MonoBehaviour {
         text.SetActive(true);
         theLights.SetActive(true);
 		audioSource.Play();
-    }
+		start.GetComponent<MeshRenderer> ().enabled = true;
+		credits.GetComponent<MeshRenderer> ().enabled = true;
+		quit.GetComponent<MeshRenderer> ().enabled = true;
+		    
+	}
 
     public void ShowAmpy()
     {
