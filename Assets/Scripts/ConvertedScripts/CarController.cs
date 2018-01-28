@@ -7,7 +7,17 @@ public class CarController : PossesableObject
 
     public bool goingLeft = false;
     public bool isCramped = false;
+
+	public AudioClip getIn;
+	public AudioClip getOut;
+
+	private AudioSource audioSource;
     
+	public override void Start ()
+	{
+		base.Start ();
+		audioSource = GetComponent<AudioSource>();
+	}
 
     // Update is called once per frame
     void Update()
@@ -91,5 +101,18 @@ public class CarController : PossesableObject
             isCramped = false;
         }
     }
+
+	public override void possessAudio()
+	{
+		audioSource.PlayOneShot(getIn);
+		base.possessAudio();
+
+	}
+
+	public override void unpossessAudio()
+	{
+		audioSource.PlayOneShot(getOut);
+		base.unpossessAudio();
+	}
 
 }
