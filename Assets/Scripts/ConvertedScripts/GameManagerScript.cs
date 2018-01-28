@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour {
 
@@ -21,7 +22,14 @@ public class GameManagerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		
+		if (Input.GetKeyDown (KeyCode.R)) {
+			SceneManager.LoadScene (SceneManager.GetActiveScene().buildIndex);
+		}
+
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			Application.Quit();
+		}
+
 	}
     
     void checkWinConditions()
@@ -30,12 +38,18 @@ public class GameManagerScript : MonoBehaviour {
 
         if (lightManager.IsAllLit)
         {
-            soundManager.audioSource.PlayOneShot(soundManager.winning);
-            text.text = "LEVEL COMPLETE";
+			winStage();
         }
         else
         {
             Invoke("checkWinConditions", .5f);
         }
     }
+
+	void winStage(){
+		soundManager.audioSource.PlayOneShot(soundManager.winning);
+		text.text = "LEVEL COMPLETE";
+
+		SceneManager.LoadScene (SceneManager.GetActiveScene().buildIndex + 1);
+	}
 }
