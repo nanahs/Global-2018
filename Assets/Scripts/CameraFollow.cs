@@ -10,12 +10,14 @@ public class CameraFollow : MonoBehaviour {
 
 	void Awake(){
 		cam = GetComponent<Camera> ();
-		targetPos = transform.position;
+
 	}
 
 	// Use this for initialization
 	void Start () {
 		
+		transform.position = defaultTarget.transform.position;
+		targetPos = transform.position;
 	}
 	
 	// Update is called once per frame
