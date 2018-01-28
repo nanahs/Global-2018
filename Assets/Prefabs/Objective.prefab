@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 23801484398805696}
   - component: {fileID: 114678864910180138}
   - component: {fileID: 65504702670579522}
+  - component: {fileID: 114637187451980072}
   m_Layer: 0
   m_Name: Objective
   m_TagString: Light
@@ -192,6 +193,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114637187451980072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1881494024053644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b793f782790d344a9be2d8f411f1487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4
 --- !u!114 &114678864910180138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -203,8 +216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 750835ff6444d5a4d8981ccbac871d3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightf: 0
-  lightObject: {fileID: 1012660531239242}
   player: {fileID: 0}
   controller: {fileID: 0}
   Game: {fileID: 0}

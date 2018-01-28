@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VacuumController : MonoBehaviour {
-
+public class CarController : MonoBehaviour {
 	public GameObject player;
 	public PlayerInput controller;
 	public Rigidbody2D charRigid;
@@ -14,8 +13,7 @@ public class VacuumController : MonoBehaviour {
 	public bool wasHitVac = false;
 	public CameraFollow camScr;
 	public Camera cam;
-	public GameObject objectPush;
-	public Vector3 xMotion;
+
 
 	// Use this for initialization
 	void Start () {
@@ -24,10 +22,10 @@ public class VacuumController : MonoBehaviour {
 		near = controller.nearVacuum;
 		camScr = cam.GetComponent<CameraFollow> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+
 		Control ();
 	}
 
@@ -64,23 +62,13 @@ public class VacuumController : MonoBehaviour {
 					controller.unPossSound.Play ();
 					controller.nearVacuum = false;
 					controller.vacuumRunning.enabled = false;
-					controller.vacuumOff.Play ();
+					controller.offCar.Play ();
 					wasHitVac = false;
 				}
 			}	
 		}
 	}
 
-	void OnCollisionEnter2D(Collision2D col){
-		if(col.gameObject.name == "Box"){
-		objectPush = col.gameObject;	
-			xMotion = transform.position;
-			objectPush.transform.position = new Vector3((float) xMotion.x,(float) xMotion.y,(float) xMotion.z);
-		
-	}
-
 
 
 }
-}
-

@@ -22,7 +22,8 @@ public class PlayerInput : MonoBehaviour
 	public AudioSource vacuumStarting;
 	public AudioSource vacuumRunning;
 	public AudioSource vacuumOff;
-	private Collider coli;
+	public AudioSource honkHonk;
+	public AudioSource offCar;
 
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -144,7 +145,144 @@ public class PlayerInput : MonoBehaviour
 
 	//takes control of other objects given an input
 	void takeControl(){
-		if (Input.GetKeyDown (KeyCode.E)) {
+
+
+		if (Input.GetKeyDown (KeyCode.W)) {
+			Possessable target = Possessable.GetPossessableInRange (transform.position, 2);
+
+			if (target == null) {
+				return;
+			}
+			if (target.type == PossessableType.Light) {
+				LightOnFunc (target.GetComponent<LightOn> ());
+			}
+			if (target.type == PossessableType.Outlet) {
+				Outlet (target.GetComponent<Outlet> ());
+			}
+			if (target.type == PossessableType.Outlet2) {
+				Outlet2 (target.GetComponent<Outlet2Lamp> ());
+			}
+			if (target.type == PossessableType.TV) {
+				Television (target.GetComponent<TVLauncher> ());
+			}
+			if (target.type == PossessableType.Vacuum) {
+				Vacuum (target.GetComponent<VacuumController> ());
+			}
+			if (target.type == PossessableType.Car) {
+				CarFunc (target.GetComponent<CarController>());
+			}
+		}
+	}
+
+
+
+	void Vacuum(VacuumController target){
+		target.wasHitVac = true;
+//		hit.collider.gameObject.GetComponent<VacuumController>().wasHitVac = true;
+		vacuumStarting.Play ();
+
+		Invoke ("playVacuum", 0.5f);
+		target.inControl = true;
+//		hit.collider.gameObject.GetComponent<VacuumController> ().inControl = true;
+		nearVacuum = true;
+		gameObject.SetActive (false);
+		Vector3 spawnPoint = transform.position;
+		spawnPoint.y += 0.6f;
+		transform.position = spawnPoint;
+	}
+
+	void Television(TVLauncher target){
+		target.wasHitTV = true;
+		nearTV = true;
+		gameObject.SetActive (false);
+		Vector3 spawnPoint = transform.position;
+		spawnPoint.y += 0.3f;
+		transform.position = spawnPoint;
+	}
+
+	void Outlet(Outlet target){
+//		hit.collider.gameObject.GetComponent<Outlet> ().wasHitOut = true;
+		target.wasHitOut = true;
+		nearOut = true;
+	}
+
+	void LightOnFunc(LightOn target){
+		nearLight = true;
+		target.wasHit = true;
+		transform.position = target.gameObject.transform.position;
+		//have to add teleporting
+	}
+
+	void Outlet2(Outlet2Lamp target){
+		//hit.collider.gameObject.GetComponent<Outlet2Lamp> ().wasHitOut2 = true;
+		target.wasHitOut2 = true;
+		nearOut = true;
+	}
+
+	
+
+	void Jump(){
+		if (Input.GetKeyDown (KeyCode.Space) && isItGrounded) {
+			Rigid.AddForce (transform.up * 400);
+			jumpSource.Play ();
+		}
+	}
+
+	void playVacuum(){
+		vacuumRunning.enabled = true;
+
+		vacuumRunning.Play ();
+	}
+
+	void CarFunc(CarController target){
+		target.wasHitVac = true;
+		honkHonk.Play ();
+		target.inControl = true;
+		nearVacuum = true;
+		gameObject.SetActive (false);
+		Vector3 spawnPoint = transform.position;
+		spawnPoint.y += 0.6f;
+		transform.position = spawnPoint;
+	}
+} 
+
+//-------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*if (Input.GetKeyDown (KeyCode.E)) {
 			RaycastHit hit;
 			Ray ray = new Ray (transform.position, Vector2.right);
 	    	if (Physics.Raycast (transform.position, Vector2.right, 2)) {
@@ -153,6 +291,7 @@ public class PlayerInput : MonoBehaviour
 				if (hit.collider.CompareTag("VacuumCleaner")) {
 					Vacuum (hit);
 				} else if (hit.collider.CompareTag ("Light")) {
+					Debug.Log ("i HIT LIGHT " + hit.collider.name);
 					LightOnFunc (hit);
 				} else if (hit.collider.CompareTag ("TV")) {
 					hit.collider.gameObject.GetComponentInChildren<TVLauncher> ().wasHitTV = true;
@@ -188,57 +327,7 @@ public class PlayerInput : MonoBehaviour
 
 			}
 
-		}
-	}
+		}*/
 
-	void Jump(){
-		if (Input.GetKeyDown (KeyCode.Space) && isItGrounded) {
-			Rigid.AddForce (transform.up * 400);
-			jumpSource.Play ();
-		}
-	}
 
-	void playVacuum(){
-		vacuumRunning.enabled = true;
-		vacuumRunning.Play ();
-	}
 
-	void Vacuum(RaycastHit hit){
-		hit.collider.gameObject.GetComponent<VacuumController>().wasHitVac = true;
-		vacuumStarting.Play ();
-		Invoke ("playVacuum", 1.0f);
-		hit.collider.gameObject.GetComponent<VacuumController> ().inControl = true;
-		nearVacuum = true;
-		gameObject.SetActive (false);
-		Vector3 spawnPoint = transform.position;
-		spawnPoint.y += 0.6f;
-		transform.position = spawnPoint;
-	}
-
-	void Television(){
-		
-		nearTV = true;
-		gameObject.SetActive (false);
-		Vector3 spawnPoint = transform.position;
-		spawnPoint.y += 0.3f;
-		transform.position = spawnPoint;
-	}
-
-	void Outlet(RaycastHit hit){
-		hit.collider.gameObject.GetComponent<Outlet> ().wasHitOut = true;
-		nearOut = true;
-	}
-
-	void LightOnFunc(RaycastHit hit){
-		nearLight = true;
-		hit.collider.GetComponent<LightOn> ().wasHit = true;
-		transform.position = hit.collider.transform.position;
-		Vector3 spawnPoint = transform.position;
-		transform.position = spawnPoint;
-	}
-
-	void Outlet2(RaycastHit hit){
-		hit.collider.gameObject.GetComponent<Outlet2Lamp> ().wasHitOut2 = true;
-		nearOut = true;
-	}
-}

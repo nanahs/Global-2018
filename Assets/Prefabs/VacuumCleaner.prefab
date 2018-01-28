@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 65915913998043036}
   - component: {fileID: 23581467249091740}
   - component: {fileID: 114646885232815374}
+  - component: {fileID: 114151660888816828}
   m_Layer: 0
   m_Name: VacuumCleaner
   m_TagString: VacuumCleaner
@@ -126,6 +127,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 100}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114151660888816828
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1489369388031358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b793f782790d344a9be2d8f411f1487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!114 &114646885232815374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,6 +156,7 @@ MonoBehaviour:
   near: 0
   inControl: 0
   goingLeft: 0
+  wasHitVac: 0
 --- !u!212 &212404062781831340
 SpriteRenderer:
   m_ObjectHideFlags: 1

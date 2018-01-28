@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212601120601464492}
   - component: {fileID: 65620026529711332}
   - component: {fileID: 114474636482713826}
+  - component: {fileID: 114676174332446334}
   m_Layer: 0
   m_Name: Outlet C
   m_TagString: Outlet
@@ -69,8 +70,22 @@ MonoBehaviour:
   player: {fileID: 0}
   charRigid: {fileID: 0}
   controller: {fileID: 0}
-  wasHitOut: 0
+  wasHitOut2: 0
   standingLamp: {fileID: 0}
+  standingLamp2: {fileID: 0}
+  Game: {fileID: 0}
+--- !u!114 &114676174332446334
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1857436845521572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b793f782790d344a9be2d8f411f1487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!212 &212601120601464492
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -9,6 +9,7 @@ TagManager:
   - TV
   - Outlet
   - Outlet (2Lamp)
+  - Car
   layers:
   - Default
   - TransparentFX

@@ -26,7 +26,9 @@ public class TVLauncher : MonoBehaviour {
 
 	void MoveAntenna(){
 		if (wasHitTV) {
+			print ("Can you see?");
 			if (controller.nearTV) {
+				Debug.Log("TV WAS HIT AND SHOULD MOVE");
 				if (Input.GetKey (KeyCode.D) && (transform.rotation.z > -0.3)) {
 					transform.Rotate (Vector3.forward * Time.deltaTime * -1 * 40, Space.World);
 				}
