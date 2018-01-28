@@ -5,7 +5,7 @@ using UnityEngine;
 public class Outlet : PossesableObject {
 
 	public GameObject otherOutlet;
-	public LightScript Light;
+	public LightScript lightScript;
     
 	
 	// Update is called once per frame
@@ -13,7 +13,11 @@ public class Outlet : PossesableObject {
         
 		if (isPossesed) {
 
-            Light.toggleLight();
+            if(lightScript)
+            {
+                lightScript.toggleLight();
+            }
+            
             player.transform.position = otherOutlet.transform.position;
             UnPosssessThis();
 

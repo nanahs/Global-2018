@@ -289,6 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   possess: {fileID: 8300000, guid: 386cf335e058e2b46881ee373d5489ca, type: 3}
   unpossess: {fileID: 8300000, guid: 8988c97c489ecb945ae3d039ad2f11af, type: 3}
+  winning: {fileID: 8300000, guid: 34097431423969e4ea95d3180e018b68, type: 3}
   audioSource: {fileID: 0}
 --- !u!114 &114446052557104164
 MonoBehaviour:
@@ -319,4 +320,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 0}
   lightManager: {fileID: 114446052557104164}
-  music: {fileID: 0}
+  soundManager: {fileID: 0}
