@@ -9,9 +9,11 @@ public class PossesableObject : MonoBehaviour {
     public GameObject player;
     public AmpyController ampyCont;
 
+    public SoundManager soundManager;
+
 	// Use this for initialization
-	void Start () {
-		
+	public virtual void Start () {
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
 	}
 	
 	// Update is called once per frame
@@ -31,6 +33,7 @@ public class PossesableObject : MonoBehaviour {
 
     public virtual void PossessThis()
     {
+        possessAudio();
         isPossesed = true;
 
         player.transform.parent = this.gameObject.transform;
@@ -40,6 +43,7 @@ public class PossesableObject : MonoBehaviour {
 
     public virtual void UnPosssessThis()
     {
+        unpossessAudio();
         isPossesed = false;
         player.SetActive(true);
         player.transform.parent = null;
@@ -47,7 +51,7 @@ public class PossesableObject : MonoBehaviour {
         
     }
 
-    /*virtual public */void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -55,7 +59,7 @@ public class PossesableObject : MonoBehaviour {
         }
     }
 
-    /*virtual public */void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
         if(isPossesed && other.gameObject.CompareTag("Player"))
         {
@@ -81,5 +85,15 @@ public class PossesableObject : MonoBehaviour {
         ampyCont.PosObj = null;
         ampyCont = null;
         player = null;
+    }
+
+    public virtual void possessAudio()
+    {
+        soundManager.audioSource.PlayOneShot(soundManager.possess);
+    }
+
+    public virtual void unpossessAudio()
+    {
+        soundManager.audioSource.PlayOneShot(soundManager.unpossess);
     }
 }

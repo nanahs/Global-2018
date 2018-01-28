@@ -5,13 +5,21 @@ using UnityEngine;
 public class VacuumController : PossesableObject
 {
 
+    public AudioClip TurnOn;
+    public AudioClip TurnOff;
+    public AudioClip Running;
+
+    private AudioSource audioSource;
+
     public bool goingLeft = false;
-    private int counter = 0;
 
 
     // Use this for initialization
-    void Start()
+    public override void Start()
     {
+        audioSource = this.gameObject.GetComponent<AudioSource>();
+        audioSource.clip = Running;
+        base.Start();
     }
 
     // Update is called once per frame
@@ -25,13 +33,7 @@ public class VacuumController : PossesableObject
     {
         if (isPossesed)
         {
-            if (counter == 0)
-            {
 
-
-            }
-            counter++;
-            //controller.transSound.Play ();
             if (Input.GetKey(KeyCode.D))
             {
                 transform.Translate(Vector2.right * Time.deltaTime * 4);
@@ -71,5 +73,19 @@ public class VacuumController : PossesableObject
         }
     }
 
+    public override void possessAudio()
+    {
+        audioSource.PlayOneShot(TurnOn);
+        audioSource.PlayDelayed(1);
+        base.possessAudio();
+        
+    }
 
+    public override void unpossessAudio()
+    {
+        audioSource.Stop();
+        audioSource.PlayOneShot(TurnOff);
+
+        base.unpossessAudio();
+    }
 }

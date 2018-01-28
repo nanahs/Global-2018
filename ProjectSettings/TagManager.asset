@@ -11,6 +11,7 @@ TagManager:
   - Outlet (2Lamp)
   - Car
   - Couch
+  - SoundManager
   layers:
   - Default
   - TransparentFX

@@ -186,7 +186,6 @@ public class PlayerInput : MonoBehaviour
 	}
 
 	void Television(TVLauncher target){
-		target.wasHitTV = true;
 		nearTV = true;
 		gameObject.SetActive (false);
 		Vector3 spawnPoint = transform.position;

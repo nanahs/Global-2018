@@ -7,23 +7,35 @@ public class GameManagerScript : MonoBehaviour {
 
 	public Text text;
     public LightManager lightManager;
-	public AudioSource music;
+	public SoundManager soundManager;
 
 
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+
+        Invoke("checkWinConditions", .5f);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		text.text = "Lights: " + lightManager.NumLightsLit + " / " + lightManager.TotalLights;
-		if (lightManager.IsAllLit) {
-			print ("Level Complete!");
-			music.enabled = false;
-			gameObject.GetComponentInChildren<AudioSource> ().enabled = (true);
-			text.text = "LEVEL COMPLETE";
-		}
+
+		
 	}
+    
+    void checkWinConditions()
+    {
+        text.text = "Lights: " + lightManager.NumLightsLit + " / " + lightManager.TotalLights;
+
+        if (lightManager.IsAllLit)
+        {
+            soundManager.audioSource.PlayOneShot(soundManager.winning);
+            text.text = "LEVEL COMPLETE";
+        }
+        else
+        {
+            Invoke("checkWinConditions", .5f);
+        }
+    }
 }

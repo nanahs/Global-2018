@@ -10,12 +10,14 @@ public class LightManager : MonoBehaviour {
     public int TotalLights;
     public int NumLightsLit;
 
+    public Light globalLight;
+
 	// Use this for initialization
 	void Start () {
 
         AllLightsInScene = GameObject.FindObjectsOfType<LightScript>();
         TotalLights = AllLightsInScene.Length;
-        Invoke("CheckLightsLamps", 1);
+        Invoke("CheckLightsLamps", .5f);
     }
 
     // Update is called once per frame
@@ -44,6 +46,8 @@ public class LightManager : MonoBehaviour {
             IsAllLit = false;
         }
 
-        Invoke("CheckLightsLamps", 1);
+        globalLight.intensity = (float)NumLightsLit / (float)TotalLights;
+
+        Invoke("CheckLightsLamps", .5f);
     }
 }

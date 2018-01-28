@@ -2,22 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TVLauncher : MonoBehaviour {
-
-	//public bool light = false;
-	//public GameObject lightObject;
-	public GameObject player;
-	public PlayerInput controller;
-	public Rigidbody2D charRigid;
-	//private float timer = 5.0f;
-	public bool wasHitTV = false;
-
-	// Use this for initialization
-	void Start () {
-		controller = player.GetComponent<PlayerInput> ();
-		charRigid = player.GetComponent<Rigidbody2D> ();
-	}
-	
+public class TVLauncher : PossesableObject {
+    
+    public GameObject antennaLauncher;
+    public float launchPower = 10;
+    
 	// Update is called once per frame
 	void Update () {
 		MoveAntenna ();	
@@ -25,38 +14,35 @@ public class TVLauncher : MonoBehaviour {
 	}
 
 	void MoveAntenna(){
-		if (wasHitTV) {
-			print ("Can you see?");
-			if (controller.nearTV) {
-				Debug.Log("TV WAS HIT AND SHOULD MOVE");
-				if (Input.GetKey (KeyCode.D) && (transform.rotation.z > -0.3)) {
-					transform.Rotate (Vector3.forward * Time.deltaTime * -1 * 40, Space.World);
-				}
-				if (Input.GetKey (KeyCode.A) && (transform.rotation.z < 0.3)) {
-					transform.Rotate (Vector3.forward * Time.deltaTime * 40, Space.World);
-				}
+		if (isPossesed) {
+
+			if (Input.GetKey (KeyCode.D) && (transform.rotation.z > -0.3)) {
+                antennaLauncher.transform.Rotate (Vector3.forward * Time.deltaTime * -1 * 40, Space.World);
 			}
+			if (Input.GetKey (KeyCode.A) && (transform.rotation.z < 0.3)) {
+                antennaLauncher.transform.Rotate (Vector3.forward * Time.deltaTime * 40, Space.World);
+			}
+			
 		}
 	}
 
 	void SpawnOut(){
-		if (wasHitTV) {
-			if(controller.nearTV){
-				if (Input.GetKeyDown (KeyCode.W)) {
+		if (isPossesed) {
+			if (Input.GetKeyDown (KeyCode.Space)) {
 
-					Vector3 spawnPoint = transform.position;
-					spawnPoint.y += 1.1f;
-					controller.gameObject.transform.position = spawnPoint;
-					controller.gameObject.SetActive (true);
-					controller.unPossSound.Play ();
-					//charRigid.gravityScale = 0;
-					charRigid.AddForce(transform.up * 500);
-					controller.nearTV = false;
-					wasHitTV = false;
+				Vector3 spawnPoint = transform.position;
+				spawnPoint.y += 1.1f;
+				player.transform.position = spawnPoint;
+                //charRigid.gravityScale = 0;
 
-				}	
-			}
+                PlatformerMotor2D pm2 = player.GetComponent<PlatformerMotor2D>();
+                
+                UnPosssessThis();
 
+                pm2.velocity = antennaLauncher.transform.up * launchPower;
+
+            }	
+			
 		}
 	}
 

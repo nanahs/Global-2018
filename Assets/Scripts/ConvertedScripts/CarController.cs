@@ -7,11 +7,7 @@ public class CarController : PossesableObject
 
     public bool goingLeft = false;
     public bool isCramped = false;
-
-    // Use this for initialization
-    void Start()
-    {
-    }
+    
 
     // Update is called once per frame
     void Update()
