@@ -59,13 +59,12 @@ public class VacuumController : PossesableObject
                 spawnPoint.y += 1.1f;
 
                 player.transform.position = spawnPoint;
-
-                PlatformerMotor2D pm2 = player.GetComponent<PlatformerMotor2D>();
-                pm2.Jump();
+				PlatformerMotor2D pm2 = player.GetComponent<PlatformerMotor2D>();
 
                 UnPosssessThis();
 
 
+				pm2.Jump();
 
 
             }

@@ -10,26 +10,30 @@ public class AmpyController : MonoBehaviour {
 
     private PlatformerMotor2D _motor;
     public AudioSource audioSource;
+	private Animator _animator;
 
     private bool alreadyJumped = false;
+	public bool isMerging = false;
     
 
     // Use this for initialization
     void Start () {
         _motor = GetComponent<PlatformerMotor2D>();
         audioSource = GetComponent<AudioSource>();
+		_animator = this.gameObject.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update ()
     {
-
-        if(PosObj != null)
+		
+		if(PosObj != null && !isMerging)
         {
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                PosObj.PossessThis();
+				isMerging = true;
+				Invoke ("PossessObj", 1);
             }
 
         }
@@ -45,5 +49,11 @@ public class AmpyController : MonoBehaviour {
         }
         
     }
+
+	void PossessObj(){
+
+		isMerging = false;
+		PosObj.PossessThis();
+	}
 
 }

@@ -8,9 +8,11 @@ public class Intro : MonoBehaviour {
     public GameObject ampy;
     public GameObject theLights;
 
+	public AudioSource audioSource;
+
     // Use this for initialization
     void Start() {
-
+		audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -22,6 +24,7 @@ public class Intro : MonoBehaviour {
     {
         text.SetActive(true);
         theLights.SetActive(true);
+		audioSource.Play();
     }
 
     public void ShowAmpy()
