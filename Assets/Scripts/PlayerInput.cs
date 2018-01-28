@@ -204,10 +204,8 @@ public class PlayerInput : MonoBehaviour
 	}
 
 	void Vacuum(RaycastHit hit){
-		hit.collider.gameObject.GetComponent<VacuumController>().wasHitVac = true;
 		vacuumStarting.Play ();
 		Invoke ("playVacuum", 1.0f);
-		hit.collider.gameObject.GetComponent<VacuumController> ().inControl = true;
 		nearVacuum = true;
 		gameObject.SetActive (false);
 		Vector3 spawnPoint = transform.position;
