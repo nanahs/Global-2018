@@ -22,10 +22,10 @@ public class LightOn : MonoBehaviour {
 		if (controller.nearLight && wasHit) {
 			if (light.intensity == 0) {
 				gameObject.GetComponentInChildren<Light> ().intensity = .5f;
-				Game.GetComponent<GameManager> ().counter++;
+				//Game.GetComponent<GameManager> ().counter++;
 			} else {
 				gameObject.GetComponentInChildren<Light> ().intensity = 0;
-				Game.GetComponent<GameManager> ().counter--;
+				//Game.GetComponent<GameManager> ().counter--;
 			}
 			controller.nearLight = false;
 			wasHit = false;

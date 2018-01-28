@@ -5,16 +5,16 @@ using UnityEngine;
 public class LightManager : MonoBehaviour {
 
     public LightScript[] AllLightsInScene;
-    //public LampScript[] AllLampsInScene;
 
     public bool IsAllLit = false;
+    public int TotalLights;
+    public int NumLightsLit;
 
 	// Use this for initialization
 	void Start () {
 
         AllLightsInScene = GameObject.FindObjectsOfType<LightScript>();
-        //AllLampsInScene = GameObject.FindObjectsOfType<LampScript>();
-
+        TotalLights = AllLightsInScene.Length;
         Invoke("CheckLightsLamps", 1);
     }
 
@@ -25,28 +25,17 @@ public class LightManager : MonoBehaviour {
 
     void CheckLightsLamps()
     {
-        int numLit = 0;
+        NumLightsLit = 0;
 
         foreach (var l in AllLightsInScene)
         {
             if (l.IsLit)
             {
-                numLit++;
+                NumLightsLit++;
             }
         }
 
-        //foreach (var l in AllLampsInScene)
-        //{
-        //    if (l.IsLit)
-        //    {
-        //        numLit++;
-        //    }
-        //}
-
-        int totalLights = AllLightsInScene.Length;
-        //totalLights += AllLampsInScene.Length;
-
-        if(numLit == totalLights)
+        if(NumLightsLit == TotalLights)
         {
             IsAllLit = true;
         }

@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
-	public GameObject text;	
-	public int counter = 0;
+public class GameManagerScript : MonoBehaviour {
+
+	public Text text;
+    public LightManager lightManager;
 	public AudioSource music;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -14,12 +18,12 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		text.GetComponent<TextMesh> ().text = "Lights: " + counter + " / 8";
-		if (counter == 8) {
+		text.text = "Lights: " + lightManager.NumLightsLit + " / " + lightManager.TotalLights;
+		if (lightManager.IsAllLit) {
 			print ("Level Complete!");
 			music.enabled = false;
 			gameObject.GetComponentInChildren<AudioSource> ().enabled = (true);
-			text.GetComponent<TextMesh> ().text = "LEVEL COMPLETE";
+			text.text = "LEVEL COMPLETE";
 		}
 	}
 }

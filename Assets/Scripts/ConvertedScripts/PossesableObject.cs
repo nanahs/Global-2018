@@ -43,10 +43,11 @@ public class PossesableObject : MonoBehaviour {
         isPossesed = false;
         player.SetActive(true);
         player.transform.parent = null;
+        removePlayer();
         
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    /*virtual public */void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -54,7 +55,7 @@ public class PossesableObject : MonoBehaviour {
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    /*virtual public */void OnTriggerExit2D(Collider2D other)
     {
         if(isPossesed && other.gameObject.CompareTag("Player"))
         {
@@ -67,7 +68,7 @@ public class PossesableObject : MonoBehaviour {
         }
     }
 
-    void assignPlayer(Collider2D other)
+    public void assignPlayer(Collider2D other)
     {
         player = other.gameObject;
         ampyCont = player.GetComponent<AmpyController>();
@@ -75,7 +76,7 @@ public class PossesableObject : MonoBehaviour {
         ampyCont.PosObj = this;
     }
 
-    void removePlayer()
+    public void removePlayer()
     {
         ampyCont.PosObj = null;
         ampyCont = null;

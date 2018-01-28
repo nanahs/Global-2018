@@ -153,9 +153,6 @@ public class PlayerInput : MonoBehaviour
 			if (target == null) {
 				return;
 			}
-			if (target.type == PossessableType.Light) {
-				LightOnFunc (target.GetComponent<LightOn> ());
-			}
 			if (target.type == PossessableType.Outlet) {
 				Outlet (target.GetComponent<Outlet> ());
 			}
@@ -177,12 +174,9 @@ public class PlayerInput : MonoBehaviour
 
 
 	void Vacuum(VacuumController target){
-		target.wasHitVac = true;
 //		hit.collider.gameObject.GetComponent<VacuumController>().wasHitVac = true;
 		vacuumStarting.Play ();
-
-		Invoke ("playVacuum", 0.5f);
-		target.inControl = true;
+        
 //		hit.collider.gameObject.GetComponent<VacuumController> ().inControl = true;
 		nearVacuum = true;
 		gameObject.SetActive (false);
@@ -202,15 +196,7 @@ public class PlayerInput : MonoBehaviour
 
 	void Outlet(Outlet target){
 //		hit.collider.gameObject.GetComponent<Outlet> ().wasHitOut = true;
-		target.wasHitOut = true;
 		nearOut = true;
-	}
-
-	void LightOnFunc(LightOn target){
-		nearLight = true;
-		target.wasHit = true;
-		transform.position = target.gameObject.transform.position;
-		//have to add teleporting
 	}
 
 	void Outlet2(Outlet2Lamp target){
@@ -235,9 +221,7 @@ public class PlayerInput : MonoBehaviour
 	}
 
 	void CarFunc(CarController target){
-		target.wasHitVac = true;
 		honkHonk.Play ();
-		target.inControl = true;
 		nearVacuum = true;
 		gameObject.SetActive (false);
 		Vector3 spawnPoint = transform.position;
@@ -245,8 +229,6 @@ public class PlayerInput : MonoBehaviour
 		transform.position = spawnPoint;
 	}
 } 
-
-//-------------------------------------------------------------------------------------------------------------------------
 
 
 

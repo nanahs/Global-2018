@@ -29,13 +29,9 @@ public class Outlet2Lamp : MonoBehaviour {
 				if (standingLamp.GetComponentInChildren<Light> ().intensity == 0.0f) {
 					standingLamp.GetComponentInChildren<Light> ().intensity = 0.5f;
 					standingLamp2.GetComponentInChildren<Light> ().intensity = 0.5f;
-					Game.GetComponent<GameManager> ().counter++;
-					Game.GetComponent<GameManager> ().counter++;
 				} else {
 					standingLamp.GetComponentInChildren<Light> ().intensity = 0.0f;
 					standingLamp2.GetComponentInChildren<Light> ().intensity = 0.0f;
-					Game.GetComponent<GameManager> ().counter--;
-					Game.GetComponent<GameManager> ().counter--;
 				}
 			}
 		}

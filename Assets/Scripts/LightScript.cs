@@ -11,7 +11,7 @@ public class LightScript : MonoBehaviour {
 	void Start () {
 
         light = this.gameObject.GetComponentInChildren<Light>();
-
+        light.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -20,7 +20,7 @@ public class LightScript : MonoBehaviour {
 
 	}
 
-    private void toggleLight()
+    public void toggleLight()
     {
         IsLit = !IsLit;
         light.enabled = IsLit;
