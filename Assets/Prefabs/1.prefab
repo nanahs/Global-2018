@@ -105,7 +105,18 @@ MonoBehaviour:
   groundDamping: 4
   inAirDamping: 5
   jumpHeight: 5
+  nearVacuum: 0
+  nearLight: 0
+  nearTV: 0
+  nearOut: 0
   isItGrounded: 0
+  Rigid: {fileID: 0}
+  jumpSource: {fileID: 0}
+  transSound: {fileID: 0}
+  unPossSound: {fileID: 0}
+  vacuumStarting: {fileID: 0}
+  vacuumRunning: {fileID: 0}
+  vacuumOff: {fileID: 0}
 --- !u!114 &114899630016751104
 MonoBehaviour:
   m_ObjectHideFlags: 1
