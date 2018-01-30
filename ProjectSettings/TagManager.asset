@@ -49,6 +49,9 @@ TagManager:
   - name: Wallpaper
     uniqueID: 4115058905
     locked: 0
+  - name: interactable background
+    uniqueID: 3498545395
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
