@@ -115,7 +115,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.12}
   serializedVersion: 2
-  m_Radius: 0.83
+  m_Radius: 0.5
 --- !u!108 &108953145665448418
 Light:
   m_ObjectHideFlags: 1
@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsLit: 0
+  isOnAtStart: 0
 --- !u!212 &212235304979852778
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -33,7 +33,7 @@ public class AmpyController : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.E))
             {
 				isMerging = true;
-				Invoke ("PossessObj", 1);
+				Invoke ("PossessObj", 0.5f);
             }
 
         }
