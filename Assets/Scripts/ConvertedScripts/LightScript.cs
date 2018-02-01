@@ -14,6 +14,7 @@ public class LightScript : MonoBehaviour {
 
         lightMesh = this.gameObject.GetComponentInChildren<MeshRenderer>();
         lightMesh.enabled = isOnAtStart;
+        IsLit = isOnAtStart;
 	}
 
     public void toggleLight()

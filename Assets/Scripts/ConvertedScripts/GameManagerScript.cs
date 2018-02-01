@@ -38,7 +38,9 @@ public class GameManagerScript : MonoBehaviour {
 
         if (lightManager.IsAllLit)
         {
-			winStage();
+            soundManager.audioSource.PlayOneShot(soundManager.winning);
+            Invoke("winStage", 3.5f);
+
         }
         else
         {
@@ -47,7 +49,7 @@ public class GameManagerScript : MonoBehaviour {
     }
 
 	void winStage(){
-		soundManager.audioSource.PlayOneShot(soundManager.winning);
+		
 		text.text = "LEVEL COMPLETE";
 		Camera.main.GetComponent<AudioSource> ().Pause();
 
