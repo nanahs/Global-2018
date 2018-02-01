@@ -6,29 +6,20 @@ public class LightScript : MonoBehaviour {
 
     public bool IsLit = false;
 	public bool isOnAtStart = false;
-    private Light light;
+
+    private MeshRenderer lightMesh;
 
 	// Use this for initialization
 	void Start () {
-		
-        light = this.gameObject.GetComponentInChildren<Light>();
-        light.enabled = false;
-		if (isOnAtStart) {
-			//light.enabled = true;
-			toggleLight ();
-		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        
 
+        lightMesh = this.gameObject.GetComponentInChildren<MeshRenderer>();
+        lightMesh.enabled = isOnAtStart;
 	}
 
     public void toggleLight()
     {
         IsLit = !IsLit;
-        light.enabled = IsLit;
+        lightMesh.enabled = !lightMesh.enabled;
     }
 
     void OnTriggerEnter2D(Collider2D other)

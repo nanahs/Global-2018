@@ -10,10 +10,12 @@ public class LightManager : MonoBehaviour {
     public int TotalLights;
     public int NumLightsLit;
 
-    public Light globalLight;
+    private Light globalLight;
 
 	// Use this for initialization
 	void Start () {
+
+        globalLight = GameObject.FindGameObjectWithTag("GlobalLight").GetComponent<Light>();
 
         AllLightsInScene = GameObject.FindObjectsOfType<LightScript>();
         TotalLights = AllLightsInScene.Length;
